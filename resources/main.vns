@@ -1,0 +1,81 @@
+import "screens.simp"
+
+config application {
+    title: "Hello World!"
+    width: 1024
+    height: 768
+    desired_width: 1920
+    desired_height: 1080
+    fullscreen: false
+    fps: 30
+    entry: welcome
+}
+
+config style {
+    font: "./fonts/Roboto-Regular.ttf"
+    font_size: 32
+    dialog: "./images/Gui_Panel_Accent.png"
+}
+
+character rin {
+    name: "Rin"
+    variants: {
+        default: "./images/Rin_SummerUni_Smile.png"
+        happy: "./images/Rin_SummerUni_OpenSmile.png"
+        sad: "./images/Rin_SummerUni_Frown.png"
+    }
+    alignment: {
+        y: 0.85
+    }
+    position: {
+        x: -0.35
+        y: 1.0
+    }
+}
+
+scene street {
+    background: "./images/Street_Summer_Day.png"
+}
+
+chapter welcome {
+    show_screen name: dialog module_name: screens
+    scene name: street duration: 1 ease_in: linear
+    enter chapter: prelude
+
+$start:
+    show character: rin duration: 1 ease_in: linear
+    say what: "Ohayo!\nWelcome to VNgeneer game example." who: rin duration: 1 ease_in: linear
+    say
+        what: "How do you feel today?"
+        who: rin
+        choices: [
+            "Pretty good!"
+            "Could be better..."
+        ]
+        duration: 1 ease_in: linear
+    jump label: happy global: CHOICE equals: 0
+    jump label: sad global: CHOICE equals: 1
+    
+$happy:
+    show character: rin variant: happy duration: 1 ease_in: linear
+    say what: "Oh, me too!" who: rin duration: 1 ease_in: linear
+    jump label: responded
+$sad:
+    show character: rin variant: sad duration: 1 ease_in: linear
+    say what: "Sad to hear that!" who: rin duration: 1 ease_in: linear
+$responded:
+
+    set_global name: ending value: true
+    jump chapter: the_end global: ending equals: true
+}
+
+chapter the_end {
+    hide character: rin duration: 1 ease_in: linear
+    say what: "- THE END -" who: narrator duration: 1 ease_in: linear
+    exit
+}
+
+chapter prelude {
+    say what: "- PRELUDE - " who: narrator duration: 1 ease_in: linear
+    exit
+}

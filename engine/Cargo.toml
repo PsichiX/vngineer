@@ -1,0 +1,25 @@
+[package]
+name = "vngineer-core"
+version = "1.0.0"
+edition = "2021"
+authors = ["Patryk 'PsichiX' Budzynski <psichix@gmail.com>"]
+description = "Visual Novel scripting layer for games in Rust"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/PsichiX/vngineer"
+repository = "https://github.com/PsichiX/vngineer"
+documentation = "https://docs.rs/vngineer-core"
+readme = "../README.md"
+
+[features]
+plugins = ["intuicio-essentials/plugins"]
+
+[dependencies]
+pest = "2.5"
+pest_derive = "2.5"
+snailquote = "0.3"
+serde = "1"
+
+[dependencies.intuicio-essentials]
+version = "0.9"
+default-features = false
+features = ["vm"]

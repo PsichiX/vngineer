@@ -1,0 +1,135 @@
+mod screens {
+    func dialog(width, height) {
+        var transition = dialog::transition();
+        if math::and(
+            reflect::is_valid(transition.from),
+            reflect::is_valid(transition.to),
+        ) {
+            if math::less_than(transition.factor, 0.5) {
+                screens::dialog_inner(
+                    transition.from,
+                    math::sub(1.0, math::mul(transition.factor, 2.0)),
+                    width,
+                    height,
+                    1.0,
+                );
+            } else {
+                screens::dialog_inner(
+                    transition.to,
+                    math::sub(math::mul(transition.factor, 2.0), 1.0),
+                    width,
+                    height,
+                    1.0,
+                );
+            }
+            return null;
+        }
+        if reflect::is_valid(transition.from) {
+            screens::dialog_inner(
+                transition.from,
+                math::sub(1.0, transition.factor),
+                width,
+                height,
+                transition.factor,
+            );
+            return null;
+        }
+        if reflect::is_valid(transition.to) {
+            screens::dialog_inner(
+                transition.to,
+                transition.factor,
+                width,
+                height,
+                transition.factor,
+            );
+            return null;
+        }
+    }
+
+    func dialog_inner(transition, factor, width, height, visibility) {
+        var size = 150.0;
+        var dialog_region = [
+            30.0,
+            math::sub(height, size),
+            math::sub(width, 60.0),
+            math::sub(size, 30.0),
+        ];
+        var text_region = [
+            math::add(dialog_region[0], 30.0),
+            math::add(dialog_region[1], 30.0),
+            math::sub(dialog_region[2], 50.0),
+            math::sub(dialog_region[3], 50.0),
+        ];
+        var style = vn::config("style");
+        var style_dialog = style{"dialog"};
+        var style_font = style{"font"};
+        var style_font_size = style{"font_size"};
+        var text = dialog::text_fragment(
+            transition.text,
+            factor,
+            true,
+        );
+        
+        render::draw_image(
+            style_dialog,
+            dialog_region,
+            [12.0, 12.0, 12.0, 12.0],
+            visibility,
+        );
+        
+        render::draw_text(
+            style_font,
+            style_font_size,
+            text,
+            text_region,
+            [0.0, 0.0],
+            visibility,
+        );
+
+        if reflect::is_null(transition.choices) {
+            if vn::clicked() {
+                if vn::hover(dialog_region) {
+                    dialog::complete(null);
+                }
+            }
+        } else {
+            var x = 100.0;
+            var y = math::sub(dialog_region[1], 64.0);
+            var w = math::sub(width, 200.0);
+            var h = 46.0;
+            var index = array::size(transition.choices);
+            
+            for choice in array::iter(transition.choices, true) {
+                var region = [x, y, w, h];
+                y = math::sub(y, 50.0);
+                index = math::sub(index, 1);
+                var text = dialog::text_fragment(
+                    choice,
+                    factor,
+                    true,
+                );
+
+                if vn::clicked() {
+                    if vn::hover(region) {
+                        dialog::complete(index);
+                    }
+                }
+
+                render::draw_image(
+                    style_dialog,
+                    region,
+                    [6.0, 6.0, 6.0, 6.0],
+                    factor,
+                );
+                render::draw_text(
+                    style_font,
+                    style_font_size,
+                    choice,
+                    region,
+                    [0.5, 0.5],
+                    factor,
+                );
+            }
+        }
+    }
+}

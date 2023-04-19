@@ -1,0 +1,24 @@
+[package]
+name = "vngineer"
+version = "1.0.0"
+edition = "2021"
+authors = ["Patryk 'PsichiX' Budzynski <psichix@gmail.com>"]
+description = "Visual Novel game engine"
+license = "MIT OR Apache-2.0"
+homepage = "https://github.com/PsichiX/vngineer"
+repository = "https://github.com/PsichiX/vngineer"
+documentation = "https://docs.rs/vngineer"
+readme = "../README.md"
+
+[dependencies]
+vngineer-core = { version = "1.0", path = "../engine", features = ["plugins"] }
+vngineer-simpleton = { version = "1.0", path = "../simpleton" }
+intuicio-essentials = "0.9"
+tetra = { version = "0.7", features = ["sdl2_bundled"] }
+clap = { version = "4", features = ["derive"] }
+easer = "0.3"
+
+[dependencies.intuicio-frontend-simpleton]
+version = "0.9"
+default-features = false
+features = ["console", "fs", "plugins"]
