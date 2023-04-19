@@ -6,7 +6,7 @@ config application {
     height: 768
     desired_width: 1920
     desired_height: 1080
-    fullscreen: false
+    fullscreen: true
     fps: 30
     entry: welcome
 }
@@ -42,7 +42,6 @@ chapter welcome {
     scene name: street duration: 1 ease_in: linear
     enter chapter: prelude
 
-$start:
     show character: rin duration: 1 ease_in: linear
     say what: "Ohayo!\nWelcome to VNgeneer game example." who: rin duration: 1 ease_in: linear
     say

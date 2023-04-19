@@ -31,7 +31,7 @@ update:
   cargo update --workspace
 
 demo:
-  cargo run --manifest-path ./runner/Cargo.toml -- ./resources/main.vns
+  cargo run --release --manifest-path ./runner/Cargo.toml -- ./resources/main.vns
 
 publish:
   cargo publish --no-verify --manifest-path ./engine/Cargo.toml
