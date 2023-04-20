@@ -1,4 +1,5 @@
-file                 =  { SOI ~ ows ~ (import ~ mws)* ~ (story_item ~ mws)* ~ EOI }
+file                 =  { SOI ~ (shebang)? ~ ows ~ (import ~ mws)* ~ (story_item ~ mws)* ~ EOI }
+shebang              = _{ "#!" ~ (!NEWLINE ~ ANY)* ~ NEWLINE+ }
 import               =  { "import" ~ mws ~ text }
 story_item           =  { config | character | scene | chapter }
 config               =  { "config" ~ mws ~ identifier ~ ows ~ "{" ~ (mws ~ config_item)* ~ mws ~ "}" }

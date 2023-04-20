@@ -1,6 +1,6 @@
 [package]
 name = "vngineer-simpleton"
-version = "1.0.0"
+version = "1.0.1"
 edition = "2021"
 authors = ["Patryk 'PsichiX' Budzynski <psichix@gmail.com>"]
 description = "Visual Novel game engine"
@@ -17,5 +17,5 @@ plugins = ["intuicio-frontend-simpleton/plugins"]
 
 [dependencies]
 vngineer-core = { version = "1.0", path = "../engine" }
-intuicio-essentials = "0.9"
-intuicio-frontend-simpleton = { version = "0.9", default-features = false }
+intuicio-essentials = "0.10"
+intuicio-frontend-simpleton = { version = "0.10", default-features = false }

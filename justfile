@@ -20,6 +20,7 @@ checks:
 
 clean:
   find . -name target -type d -exec rm -r {} +
+  just remove-lockfiles
 
 remove-lockfiles:
   find . -name Cargo.lock -type f -exec rm {} +
@@ -28,7 +29,12 @@ list-outdated:
   cargo outdated -R -w
 
 update:
-  cargo update --workspace
+  cargo update --manifest-path ./engine/Cargo.toml --aggressive
+  cargo update --manifest-path ./simpleton/Cargo.toml --aggressive
+  cargo update --manifest-path ./runner/Cargo.toml --aggressive
+
+install:
+  cargo install --path ./runner
 
 demo:
   cargo run --release --manifest-path ./runner/Cargo.toml -- ./resources/main.vns
