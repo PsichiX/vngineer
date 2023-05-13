@@ -36,6 +36,7 @@ fn main() -> tetra::Result {
         .extension("vns", FileContentProvider::new("vns", VnContentParser))
         .extension("plugin", IgnoreContentProvider)
         .extension("simp", IgnoreContentProvider)
+        .extension("bimp", IgnoreContentProvider)
         .default_extension("vns");
     let vn_package = VnPackage::new(&cli.entry, &mut vn_content_provider).unwrap();
     vn_package.install_plugins(&mut registry, &[root.as_str()]);
@@ -45,6 +46,7 @@ fn main() -> tetra::Result {
             "simp",
             FileContentProvider::new("simp", SimpletonContentParser),
         )
+        .extension("bimp", SimpletonBinaryFileContentProvider::new("bimp"))
         .extension("plugin", IgnoreContentProvider)
         .default_extension("simp");
     for (path, file) in &vn_package.files {

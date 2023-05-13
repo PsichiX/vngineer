@@ -265,11 +265,11 @@ mod tests {
         let mut content_provider = ExtensionContentProvider::<VnFile>::default()
             .extension("vns", FileContentProvider::new("vns", VnContentParser))
             .extension("plugin", IgnoreContentProvider)
+            .extension("bimp", IgnoreContentProvider)
             .extension("simp", IgnoreContentProvider)
             .default_extension("vns");
-        let story = VnPackage::new("../resources/main.vns", &mut content_provider)
-            .unwrap()
-            .compile();
+        let story = VnPackage::new("../resources/main.vns", &mut content_provider).unwrap();
+        let story = story.compile();
         let mut registry = Registry::default().with_basic_types();
         crate::library::install(&mut registry);
         install(&mut registry);

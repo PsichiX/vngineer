@@ -17,5 +17,5 @@ plugins = ["intuicio-frontend-simpleton/plugins"]
 
 [dependencies]
 vngineer-core = { version = "1.0", path = "../engine" }
-intuicio-essentials = "0.10"
-intuicio-frontend-simpleton = { version = "0.10", default-features = false }
+intuicio-essentials = "0.12"
+intuicio-frontend-simpleton = { version = "0.12", default-features = false }

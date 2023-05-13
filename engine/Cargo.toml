@@ -20,6 +20,6 @@ snailquote = "0.3"
 serde = "1"
 
 [dependencies.intuicio-essentials]
-version = "0.10"
+version = "0.12"
 default-features = false
 features = ["vm"]
