@@ -1,6 +1,6 @@
 [package]
 name = "vngineer-core"
-version = "1.0.2"
+version = "1.0.3"
 edition = "2021"
 authors = ["Patryk 'PsichiX' Budzynski <psichix@gmail.com>"]
 description = "Visual Novel scripting layer for games in Rust"
@@ -20,6 +20,6 @@ snailquote = "0.3"
 serde = "1"
 
 [dependencies.intuicio-essentials]
-version = "0.12"
+version = "0.13"
 default-features = false
 features = ["vm"]

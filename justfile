@@ -15,8 +15,8 @@ clippy:
 
 checks:
   just build
-  just test
   just clippy
+  just test
 
 clean:
   find . -name target -type d -exec rm -r {} +
